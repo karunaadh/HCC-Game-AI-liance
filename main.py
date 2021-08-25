@@ -72,7 +72,6 @@ t.write("PONG", font = ("Times New Roman", 40, 'bold'), align = "center")
 travel(0, -25)
 t.color ("navy blue")
 t.write("AI-liance", font = ("Times New Roman", 15, 'bold'), align = "center")
-
 #---------------------Game intro and input-------------
 print("Welcome to pong! Press the 'up' and 'down' keys to control the right paddle, 'w' and 's' keys to control the left paddle :)")
 
@@ -225,8 +224,11 @@ ball1.dx = 4
 ball1.dy = 4
 
 if twoball == True:
-  ball2.dx = -3.75
-  ball2.dy = -3.75
+  ball2.dx = -4
+  ball2.dy = -4
+  ball2.origspeed = -4
+
+ball1.origspeed = 4
 
 balls = [ball1]
 if twoball == True:
@@ -359,6 +361,14 @@ while running == True:
     if ball.xcor() <= -332:
       #if multiplayer, add score to whoever wins and restart ball at center
       if single == False:
+        if ball.dx < 0:
+          ball.dx = -ball.origspeed
+        else:
+          ball.dx = ball.origspeed
+        if ball.dy < 0:
+          ball.dy = -ball.origspeed
+        else: 
+          ball.dy = ball.origspeed
         #add one to right player
         rightscore += 1
         #erase old score
@@ -393,6 +403,14 @@ while running == True:
 
     #right border BALL -----------------------------------
     elif ball.xcor() >= 332:
+      if ball.dx < 0:
+        ball.dx = -ball.origspeed
+      else:
+        ball.dx = ball.origspeed
+      if ball.dy < 0:
+        ball.dy = -ball.origspeed
+      else: 
+        ball.dy = ball.origspeed
       #if multiplayer
       if single == False:
         #add one to left player score
@@ -517,19 +535,4 @@ time.sleep(1)
 winner.clear()
 winnerbox()
 winner.write("Thanks For Playing!", align = "center", font = style)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
